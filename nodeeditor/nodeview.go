@@ -21,7 +21,7 @@ func NewNodeView() *NodeView {
 	instance.grid = container.New(layout.NewVBoxLayout())
 
 	instance.title = widget.NewLabel("")
-	instance.grid.Add(instance.title)
+	instance.grid.Add(container.NewCenter(instance.title))
 
 	return instance
 }
@@ -54,10 +54,14 @@ func (self *NodeView) AddPort(port *PortModel) {
 		dirChild := canvas.NewCircle(colornames.Green)
 		dirChild.Resize(fyne.NewSize(10, 10))
 		noLayout := container.NewWithoutLayout(dirChild)
+
 		nameChild := widget.NewLabel(port.Name)
+		// Create a container with padding to ensure fixed distance from window edge
+		border := container.NewBorder(nil, nil, noLayout, nil)
 		parent.Add(layout.NewSpacer())
 		parent.Add(nameChild)
-		parent.Add(noLayout)
+		parent.Add(border)
+
 	case DIR_INTERNAL:
 		nameChild := widget.NewLabel(port.Name)
 		parent.Add(layout.NewSpacer())
