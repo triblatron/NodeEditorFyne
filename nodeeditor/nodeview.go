@@ -60,7 +60,7 @@ func (self *NodeView) AddPort(port *PortModel) {
 		border := container.NewBorder(nil, nil, noLayout, nil)
 		parent.Add(layout.NewSpacer())
 		parent.Add(nameChild)
-		parent.Add(border)
+		parent.Add(container.NewPadded(border))
 
 	case DIR_INTERNAL:
 		nameChild := widget.NewLabel(port.Name)
