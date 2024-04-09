@@ -45,10 +45,11 @@ func (self *NodeView) AddPort(port *PortModel) {
 	case DIR_IN:
 		dirChild := canvas.NewCircle(colornames.Red)
 		dirChild.Resize(fyne.NewSize(10, 10))
-		noLayout := container.NewWithoutLayout(dirChild)
 		nameChild := widget.NewLabel(port.Name)
+		nameChild.Alignment = fyne.TextAlignCenter
+		noLayout := container.NewBorder(nil, nil, container.NewWithoutLayout(dirChild), nil, container.NewPadded(nameChild))
 		parent.Add(noLayout)
-		parent.Add(nameChild)
+		//		parent.Add(nameChild)
 		//parent.Add(layout.NewSpacer())
 	case DIR_OUT:
 		dirChild := canvas.NewCircle(colornames.Green)
@@ -56,6 +57,7 @@ func (self *NodeView) AddPort(port *PortModel) {
 		noLayout := container.NewWithoutLayout(dirChild)
 
 		nameChild := widget.NewLabel(port.Name)
+		nameChild.Alignment = fyne.TextAlignTrailing
 		// Create a container with padding to ensure fixed distance from window edge
 		border := container.NewBorder(nil, nil, noLayout, nil)
 		parent.Add(layout.NewSpacer())
